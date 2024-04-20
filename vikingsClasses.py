@@ -39,23 +39,53 @@ class Saxon(Soldier):
 
 class War():
     def __init__(self):
-        # your code here
+        self.vikingArmy = list()
+        self.saxonArmy = list()
 
     def addViking(self, viking):
-        # your code here
+        self.vikingArmy.append(viking)
     
     def addSaxon(self, saxon):
-        # your code here
+        self.saxonArmy.append(saxon)
     
     def vikingAttack(self):
-        # your code here
+        id_viking = random.randrange(len(self.vikingArmy)-1)
+        id_saxon = random.randrange(len(self.saxonArmy)-1)
+
+        viking_selected = self.vikingArmy[id_viking]
+        saxon_selected = self.saxonArmy[id_saxon]
+
+        result = saxon_selected.receiveDamage(viking_selected.attack())
+
+        if "died in combat" in result:
+            self.saxonArmy.pop(id_saxon)
+        
+        return result
+
     
     def saxonAttack(self):
-        # your code here
+        id_viking = random.randrange(len(self.vikingArmy)-1)
+        id_saxon = random.randrange(len(self.saxonArmy)-1)
+
+        viking_selected = self.vikingArmy[id_viking]
+        saxon_selected = self.saxonArmy[id_saxon]
+
+        result = viking_selected.receiveDamage(saxon_selected.attack())
+
+        if "died in combat" in result:
+            self.vikingArmy.pop(id_viking)
+        
+        return result
+
 
     def showStatus(self):
-        # your code here
-    pass
+        if len(self.saxonArmy) == 0:
+            return "Vikings have won the war of the century!"
+        elif len(self.vikingArmy) == 0:
+            return "Saxons have fought for their lives and survive another day..."
+        else:
+            "Vikings and Saxons are still in the thick of battle."
+
 
 #yop
 class War2:
