@@ -1,25 +1,30 @@
-
-from .vikingsClasses import Soldier, Viking, Saxon, War
 import random
+from vikingsClasses import Soldier, Viking, Saxon, War
 
+# Function to create teams
+def createTeams(war):
+    soldier_names = ["Albert", "Andres", "Archie", "Dani", "David", "Gerard", "German", "Graham", "Imanol", "Laura"]
+    for i in range(5):
+        viking = Viking(random.choice(soldier_names), 100, random.randint(50, 100))
+        war.addViking(viking)
+    for i in range(5):
+        saxon = Saxon(100, random.randint(50, 100))
+        war.addSaxon(saxon)
 
-soldier_names = ["albert","andres","archie","dani", "david","gerard","german","graham","imanol","laura"]
+# Function to execute the game
+def executeGame():
+    war = War()
+    createTeams(war)
+    round = 0
+    while war.showStatus() == "Vikings and Saxons are still in the thick of battle.":
+        print(f"Round {round}")
+        print(war.vikingAttack())
+        print(war.saxonAttack())
+        print(f"Viking army: {len(war.vikingArmy)} warriors, Saxon army: {len(war.saxonArmy)} warriors")
+        print(war.showStatus())
+        round += 1
+    print(war.showStatus())
 
-
-#Create 5 Vikings
-for i in range(0,5):
-    if i:
-        War.addViking(Viking(soldier_names[random.randint(0,9)],100,random.randint(0,100)))
-
-#Create 5 Saxons
-for i in range(0,5):
-    if i:
-        War.addSaxon(Saxon(100,random.randint(0,100)))
-    
-round = 0
-while War.showStatus() == "Vikings and Saxons are still in the thick of battle.":
-    War.vikingAttack()
-    War.saxonAttack()
-    print(f"round: {round} // Viking army: {len(War.vikingArmy)} warriors",f"and Saxon army: {len(War.saxonArmy)} warriors")
-    print(War.showStatus())
-    round += 1
+# Run the game
+if __name__ == "__main__":
+    executeGame()
