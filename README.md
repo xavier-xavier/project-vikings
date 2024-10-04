@@ -329,3 +329,4 @@ Crea un juego utilizando las clases que definiste. Para esto, necesitarás:
 ## Desafío Adicional para los Nerds
 
 Puedes intentar hacer tus propias pruebas para tu código creando otro archivo de prueba.
+(5-testGameFile.py)
