@@ -1,8 +1,46 @@
+import random
 import unittest
-from vikingsClasses import War, Viking, Saxon
+from vikingsClasses import War,Viking, Saxon
 from inspect import signature
 
+class War:
+    def __init__(self):
+        self.vikingArmy = []
+        self.saxonArmy = []
 
+    def addViking(self, viking):
+        self.vikingArmy.append(viking)
+
+    def addSaxon(self, saxon):
+        self.saxonArmy.append(saxon)
+
+    def vikingAttack(self):
+        if self.saxonArmy:
+            viking = random.choice(self.vikingArmy)
+            saxon = random.choice(self.saxonArmy)
+            damage = viking.attack()
+            result = saxon.receiveDamage(damage)
+            if saxon.health <= 0:
+                self.saxonArmy.remove(saxon)
+            return result
+
+    def saxonAttack(self):
+        if self.vikingArmy:
+            saxon = random.choice(self.saxonArmy)
+            viking = random.choice(self.vikingArmy)
+            damage = saxon.attack()
+            result = viking.receiveDamage(damage)
+            if viking.health <= 0:
+                self.vikingArmy.remove(viking)
+            return result
+
+    def showStatus(self):
+        if not self.saxonArmy:
+            return "¡Los Vikingos han ganado la guerra del siglo!"
+        elif not self.vikingArmy:
+            return "Los Sajones han luchado por sus vidas y sobreviven otro día..."
+        else:
+            return "Los Vikingos y los Sajones todavía están en plena batalla."
 class TestWar(unittest.TestCase):
 
     @classmethod
@@ -80,7 +118,7 @@ class TestWar2(unittest.TestCase):
 
     def testAddSaxon(self):
         print(self.war.__dict__)
-        self.assertEqual(self.war.vikingAttack(), 'A Saxon has died in combat')
+        self.assertEqual(self.war.vikingAttack(), 'Un Saxon ha muerto en combate')
 
     def testSaxonAttackIsFunction(self):
         self.assertEqual(callable(self.war.saxonAttack), True)
@@ -102,7 +140,7 @@ class TestWar2(unittest.TestCase):
 
     def testReturnOfSaxonAttack(self):
         self.assertEqual(self.war.saxonAttack(), self.viking.name +
-                         ' has received ' + str(self.saxon.strength) + ' points of damage')
+                         ' ha recibido ' + str(self.saxon.strength) + ' puntos de daño')
 
     def testShowStatusShouldIsFunction(self):
         self.assertEqual(callable(self.war.showStatus), True)
@@ -113,17 +151,17 @@ class TestWar2(unittest.TestCase):
     def testShouldReturnStringVikingsWon(self):
         self.war.vikingAttack()
         self.assertEqual(self.war.showStatus(),
-                         'Vikings have won the war of the century!')
+                         '¡Los Vikingos han ganado la guerra del siglo!')
 
     def testShouldReturnStringSaxonsWon(self):
         for i in range(12):
             self.war.saxonAttack()
         self.assertEqual(self.war.showStatus(
-        ), 'Saxons have fought for their lives and survive another day...')
+        ), 'Los Sajones han luchado por sus vidas y sobreviven otro día...')
 
     def testShouldReturnStringStillFighting(self):
         self.assertEqual(
-            self.war.showStatus(), 'Vikings and Saxons are still in the thick of battle.')
+            self.war.showStatus(), 'Los Vikingos y los Sajones todavía están en plena batalla.')
 
 
 if __name__ == '__main__':
