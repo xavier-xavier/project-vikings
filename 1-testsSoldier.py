@@ -3,6 +3,19 @@ from vikingsClasses import Soldier
 from inspect import signature
 
 
+class Soldier:
+    def __init__(self, health, strength):
+        self.health = health
+        self.strength = strength
+        # your code here
+
+    def attack(self):
+        return self.strength
+        # your code here
+
+    def receiveDamage(self, damage):
+        self.health -= damage
+
 class TestSoldier(unittest.TestCase):
 
     @classmethod

@@ -1,8 +1,18 @@
 import unittest
-from vikingsClasses import Saxon
+from vikingsClasses import Soldier
 from inspect import signature
 
+class Saxon(Soldier):
+    def __init__(self,health,strength):
+        super().__init__(health,strength)
 
+    def receiveDamage(self,damage):
+        self.health -= damage
+
+        if self.health > 0:
+            return f"Un Saxon ha recibido {damage} puntos de daño"
+        else:
+            return "Un Saxon ha muerto en combate"
 class TestSaxon(unittest.TestCase):
 
     @classmethod
@@ -42,15 +52,15 @@ class TestSaxon(unittest.TestCase):
 
     def testReceiveDamageString45(self):
         self.assertEqual(self.saxon.receiveDamage(
-            45), 'A Saxon has received 45 points of damage')
+            45), 'Un Saxon ha recibido 45 puntos de daño')
 
     def testReceiveDamageString10(self):
         self.assertEqual(self.saxon.receiveDamage(
-            10), 'A Saxon has received 10 points of damage')
+            10), 'Un Saxon ha recibido 10 puntos de daño')
 
     def testReceiveDamageStringDied(self):
         self.assertEqual(self.saxon.receiveDamage(self.health),
-                         'A Saxon has died in combat')
+                         'Un Saxon ha muerto en combate')
 
 
 if __name__ == '__main__':

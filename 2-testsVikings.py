@@ -1,7 +1,21 @@
 import unittest
-from vikingsClasses import Viking
+from vikingsClasses import Soldier
 from inspect import signature
 
+class Viking(Soldier):
+    def __init__(self, name, health, strength):
+        self.name = name
+        super().__init__(health, strength)
+
+    def battleCry(self):
+        return "Odin os posee a todos"
+
+    def receiveDamage(self, damage):
+        self.health -= damage
+        if self.health <= 0:
+            return f"{self.name} ha muerto en combate"
+        else:
+            return f"{self.name} ha recibido {damage} puntos de daño"
 
 class TestViking(unittest.TestCase):
 
