@@ -194,27 +194,3 @@ class War:
             return "Saxons have fought for their lives and survived another day..."
         else:
             return "Vikings and Saxons are still in the thick of battle."
-
-class War2:
-
-    def __init__(self):
-        # your code here
-
-    def addViking(self, Viking):
-        # your code here
-    
-    def addSaxon(self, Saxon):
-        # your code here
-    
-    def vikingAttack(self):
-        # your code here
-
-    def saxonAttack(self):
-        # your code here
-
-    def showStatus(self):
-        # your code here
-
-    pass
-
-
